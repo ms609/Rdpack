@@ -175,12 +175,14 @@
 <div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>\insertCite{<span class="sc">@</span>see also <span class="sc">@</span>parseRd and <span class="sc">@</span>Rpackage<span class="sc">:</span>rbibutils}{Rdpack}</span>
 <span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>\insertCite{<span class="sc">@</span>see also <span class="sc">@</span>parseRd; <span class="sc">@</span>Rpackage<span class="sc">:</span>rbibutils}{Rdpack}</span>
 <span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>\insertCite{<span class="sc">@</span>see also <span class="sc">@</span>parseRd and <span class="sc">@</span>Rpackage<span class="sc">:</span>rbibutils;textual}{Rdpack}</span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>\insertCite{<span class="sc">@</span>parseRd, chapter <span class="dv">3</span>}{Rdpack}</span></code></pre></div>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>\insertCite{<span class="sc">@</span><span class="er">@</span>parseRd, chapter <span class="dv">3</span>}{Rdpack}</span></code></pre></div>
 <p>produces:</p>
 <p>(see also Murdoch 2010 and Boshnakov and Putman 2020)</p>
 <p>(see also Murdoch 2010; Boshnakov and Putman 2020)</p>
 <p>see also Murdoch (2010) and Boshnakov and Putman (2020)</p>
 <p>(Murdoch 2010, chapter 3)</p>
+<p>Note the doubled <code>@</code> in the last example: the first <code>@</code> switches the argument to free-text mode, the second is the prefix that marks <code>parseRd</code> as a key. (<code>chapter 3</code> has no <code>@</code>, so it is left as text.)</p>
+<p>If using roxygen2, note that <code>@@</code> in an <code>.R</code> source file is replaced with a single <code>@</code> in the corresponding <code>.Rd</code> documentation file. Hence the key-plus-free-text form must be written as <code>@@@@parseRd, chapter 3</code>, such that roxygen2 writes <code>@@parseRd, chapter 3</code>.</p>
 <p>With the parenthesised citations, if you need markup for the text before or after the citations, say <code>see also</code> in italic, put <code>;nobrackets</code><sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup> at the end of the first argument of the Rd macro, take out the part containing markup, and put the parentheses were suitable. For example,</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>(\emph{see also} \insertCite{<span class="sc">@</span><span class="er">@</span>parseRd and <span class="sc">@</span>Rpackage<span class="sc">:</span>rbibutils;nobrackets}{Rdpack})</span></code></pre></div>
 <p>(in markdown, use <code>_see also_</code> in place of <code>\emph{see also})</code>. This gives:</p>
