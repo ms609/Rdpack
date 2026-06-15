@@ -71,7 +71,7 @@ reprompt(dummyfun, filename = fn)
 
 # check that the result can be parsed and show it.
 Rdo_show(tools::parse_Rd(fn))
-#> Warning: cannot open file '/tmp/RtmpbO21tQ/dummyfun1a258abf1ddRd': No such file or directory
+#> Warning: cannot open file '/tmp/RtmpiMMmdN/dummyfun1a745eaadf33Rd': No such file or directory
 #> Error in file(con, "r"): cannot open the connection
 
 unlink(fn)

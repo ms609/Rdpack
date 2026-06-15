@@ -14,7 +14,7 @@ Source:
 
 Boshnakov GN (????). “Rdpack: Update and Manipulate Rd Documentation
 Objects.”
-[doi:10.5281/zenodo.3925612](https://doi.org/10.5281/zenodo.3925612), R
+[doi:10.5281/zenodo.3925612](https://doi.org/10.5281/zenodo.3925612). R
 package version 2.6.6.
 
     @Misc{,
