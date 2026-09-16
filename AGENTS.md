@@ -2,7 +2,9 @@
 
 Personal agent notes. **Never commit this to `master` or any PR branch**: `master` of the
 fork is PR'd wholesale to upstream. It lives alone on the orphan branch `agents` of `origin`
-and is hidden locally via `.git/info/exclude`.
+and is hidden locally via `.git/info/exclude`. (That hides it from git only: a local
+`R CMD build` still bundles it as a non-standard top-level file — harmless, but don't
+be surprised by the NOTE. `.Rbuildignore` is tracked, so it can't go there.)
 
 Restore on a new machine:
 
