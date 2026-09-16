@@ -29,7 +29,24 @@ in_subdirectory <- function(string, wd = getwd()){
         NULL
 }
 
-get_bibentries <- function(..., package = NULL, bibfile = "REFERENCES.bib", 
+## 2026-09-16 new: wrapper around utils::bibentry() for use as argument 'fbibentry' of
+##     readBib(). Biblatex (e.g. Zotero's Better BibTeX) uses fields 'journaltitle' and
+##     'date' instead of 'journal' and 'year'. Without the latter bibentry() refuses to
+##     create entries of type 'Article', etc., and citations have no year.
+.bibentry_biblatex <- function(...){
+    fields <- list(...)
+    if(is.null(fields[["journal"]]) && !is.null(fields[["journaltitle"]]))
+        fields[["journal"]] <- fields[["journaltitle"]]
+    if(is.null(fields[["year"]]) && !is.null(fields[["date"]])){
+        ## date is YYYY, YYYY-MM, YYYY-MM-DD, or a range, e.g. 2020-02/2021-01
+        year <- regmatches(fields[["date"]], regexpr("[0-9]{4}", fields[["date"]]))
+        if(length(year) == 1)
+            fields[["year"]] <- year
+    }
+    do.call(utils::bibentry, fields)
+}
+
+get_bibentries <- function(..., package = NULL, bibfile = "REFERENCES.bib",
                            url_only = FALSE, stop_on_error = TRUE){
     if(is.null(package)){
         fn <- file.path(..., bibfile)
@@ -107,7 +124,8 @@ get_bibentries <- function(..., package = NULL, bibfile = "REFERENCES.bib",
     ## test:
     res <- if(packageVersion("rbibutils") > '2.2.4')
                ## issue #7 in rbibutils
-               readBib(file = fn, encoding = encoding, direct = TRUE, texChars = "Rdpack")
+               readBib(file = fn, encoding = encoding, direct = TRUE, texChars = "Rdpack",
+                       fbibentry = .bibentry_biblatex)
            else if(packageVersion("rbibutils") >= '2.1.2')
                readBib(file = fn, encoding = encoding, direct = TRUE)
            else

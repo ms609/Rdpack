@@ -150,3 +150,19 @@ test_that("bib works fine", {
 
 })
 
+
+test_that("biblatex fields 'date' and 'journaltitle' are supported", {
+    bibs <- get_bibentries(test_path(), bibfile = "biblatex.bib")
+    expect_equal(sort(names(bibs)), c("bothFields", "zoteroArticle", "zoteroMonth"))
+
+    expect_equal(bibs[["zoteroArticle"]]$year, "2020")
+    expect_equal(bibs[["zoteroArticle"]]$journal, "Some Journal")
+    expect_equal(bibs[["zoteroMonth"]]$year, "2019")
+    ## 'year' takes precedence over 'date'
+    expect_equal(bibs[["bothFields"]]$year, "2001")
+
+    expect_equal(safe_cite("zoteroArticle", bibs), "(Smith 2020)")
+    expect_equal(safe_cite("zoteroMonth", bibs, textual = TRUE), "Jones (2019)")
+    expect_match(.toRd_styled(bibs[["zoteroArticle"]], "Rdpack"), "2020", fixed = TRUE)
+    expect_match(.toRd_styled(bibs[["zoteroArticle"]], "Rdpack"), "Some Journal", fixed = TRUE)
+})

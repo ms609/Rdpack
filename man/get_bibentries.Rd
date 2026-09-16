@@ -35,6 +35,14 @@ get_bibentries(\dots, package = NULL, bibfile = "REFERENCES.bib",
   \itemize{
      \item \code{get_bibentries} deals with percent signs in URL's.
 
+     \item \code{get_bibentries} accepts the biblatex fields
+        \code{journaltitle} and \code{date} (as exported, for example,
+        by Zotero's Better BibTeX) in place of \code{journal} and
+        \code{year}. If field \code{journal} is missing, it is set to
+        \code{journaltitle}. If field \code{year} is missing, it is set
+        to the year extracted from \code{date} (e.g. \code{"2020"} from
+        \code{"2020-02-02"}).
+
     \item if the current working directory is in the development
         directory of \code{package}, \code{get_bibentries} will first
         search for the bib file under that directory.

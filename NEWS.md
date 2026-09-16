@@ -5,6 +5,11 @@
   signs, `@@`, at least one of them should be duplicated in the roxygen comments (since
   roxygen2 exports `@@` as a single `@`).
 
+- `get_bibentries()` (and hence `\insertRef`, `\insertCite`, etc.) now accepts the
+  biblatex fields `journaltitle` and `date`, as exported by Zotero's Better BibTeX, in
+  place of `journal` and `year`. Previously such entries were dropped with a warning or
+  cited without a year.
+
 
 # Rdpack 2.6.6
 
