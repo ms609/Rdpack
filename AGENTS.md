@@ -52,6 +52,12 @@ git push origin agents
   → generated R code of `bibentry(...)` calls → `readBibentry`, which drops entries that
   fail `utils::bibentry()` validation. Hook: `fbibentry` argument (rbibutils ≥ 2.2.8).
 
+- Sister checkout `../rbibutils` (cloned from GeoBosh/rbibutils; no ms609 fork yet). Bib-field
+  normalisation shared by both bibtex readers lives in `src/common_bt_btd.c` (`process_ref`).
+  Many `src/*.c` files say "automatically generated from *.org" (sources not in repo) —
+  avoid editing those. To test Rdpack against a patched rbibutils:
+  `R CMD INSTALL --library=<scratch>/lib ../rbibutils` then `R_LIBS=<scratch>/lib`.
+
 ## Testing
 
 ```bash
