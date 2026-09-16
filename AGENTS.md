@@ -45,7 +45,7 @@ git push origin agents
   `REFERENCES.bib` via `rbibutils::readBib(direct = TRUE, texChars = "Rdpack")`),
   `insert_ref`, `insert_citeOnly` (the `\insertCite` machinery), `safe_cite`,
   `insert_all_ref`, `.toRd_styled`, bibstyles `JSSRd`/`JSSLongNames`.
-- `man/macros/refmacros.Rd` — the `insertRef`, `insertCite`, … Rd macro definitions.
+- `man/macros/refmacros.Rd` — the `\insertRef`, `\insertCite`, … Rd macro definitions.
 - Bib parsing is delegated to **rbibutils** (also Georgi's). `readBib` → `bibtexImport`
   → generated R code of `bibentry(...)` calls → `readBibentry`, which drops entries that
   fail `utils::bibentry()` validation. Hook: `fbibentry` argument (rbibutils ≥ 2.2.8).
