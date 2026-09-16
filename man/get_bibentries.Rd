@@ -38,10 +38,11 @@ get_bibentries(\dots, package = NULL, bibfile = "REFERENCES.bib",
      \item \code{get_bibentries} accepts the biblatex fields
         \code{journaltitle} and \code{date} (as exported, for example,
         by Zotero's Better BibTeX) in place of \code{journal} and
-        \code{year}. If field \code{journal} is missing, it is set to
-        \code{journaltitle}. If field \code{year} is missing, it is set
-        to the year extracted from \code{date} (e.g. \code{"2020"} from
-        \code{"2020-02-02"}).
+        \code{year}. As in pandoc and biber, \code{journaltitle} takes
+        precedence over \code{journal}, and \code{date} (if of the form
+        \code{YYYY}, \code{YYYY-MM} or \code{YYYY-MM-DD}, possibly followed
+        by a range) over \code{year}, \code{month} and \code{day}
+        (e.g. year \code{"2020"} from \code{"2020-02-02"}).
 
     \item if the current working directory is in the development
         directory of \code{package}, \code{get_bibentries} will first

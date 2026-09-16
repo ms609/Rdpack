@@ -8,7 +8,8 @@
 - `get_bibentries()` (and hence `\insertRef`, `\insertCite`, etc.) now accepts the
   biblatex fields `journaltitle` and `date`, as exported by Zotero's Better BibTeX, in
   place of `journal` and `year`. Previously such entries were dropped with a warning or
-  cited without a year.
+  cited without a year. As in pandoc and biber, `date` (if parsable) and `journaltitle`
+  take precedence over `year` and `journal`.
 
 
 # Rdpack 2.6.6

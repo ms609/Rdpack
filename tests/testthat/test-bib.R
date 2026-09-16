@@ -158,8 +158,11 @@ test_that("biblatex fields 'date' and 'journaltitle' are supported", {
     expect_equal(bibs[["zoteroArticle"]]$year, "2020")
     expect_equal(bibs[["zoteroArticle"]]$journal, "Some Journal")
     expect_equal(bibs[["zoteroMonth"]]$year, "2019")
-    ## 'year' takes precedence over 'date'
-    expect_equal(bibs[["bothFields"]]$year, "2001")
+    expect_equal(bibs[["zoteroArticle"]]$month, "February")
+    expect_null(bibs[["zoteroMonth"]]$day)
+    ## as in pandoc and biber, 'date' takes precedence over 'year'
+    expect_equal(bibs[["bothFields"]]$year, "1999")
+    expect_equal(bibs[["bothFields"]]$day, "31")
 
     expect_equal(safe_cite("zoteroArticle", bibs), "(Smith 2020)")
     expect_equal(safe_cite("zoteroMonth", bibs, textual = TRUE), "Jones (2019)")

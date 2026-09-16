@@ -33,15 +33,25 @@ in_subdirectory <- function(string, wd = getwd()){
 ##     readBib(). Biblatex (e.g. Zotero's Better BibTeX) uses fields 'journaltitle' and
 ##     'date' instead of 'journal' and 'year'. Without the latter bibentry() refuses to
 ##     create entries of type 'Article', etc., and citations have no year.
+##
+##     As in pandoc and biber (and rbibutils > 2.4.1), 'journaltitle' and a parsable 'date'
+##     take precedence over 'journal' and 'year'/'month'/'day'.
 .bibentry_biblatex <- function(...){
     fields <- list(...)
-    if(is.null(fields[["journal"]]) && !is.null(fields[["journaltitle"]]))
+    if(!is.null(fields[["journaltitle"]]))
         fields[["journal"]] <- fields[["journaltitle"]]
-    if(is.null(fields[["year"]]) && !is.null(fields[["date"]])){
-        ## date is YYYY, YYYY-MM, YYYY-MM-DD, or a range, e.g. 2020-02/2021-01
-        year <- regmatches(fields[["date"]], regexpr("[0-9]{4}", fields[["date"]]))
-        if(length(year) == 1)
-            fields[["year"]] <- year
+    if(!is.null(fields[["date"]])){
+        ## [-]YYYY[-MM[-DD]], optionally followed by qualifiers, a time or a range,
+        ##     e.g. 2020-02-02, 2020~, 2020-02/2021-01; months 21-24 are seasons
+        ymd <- regmatches(fields[["date"]],
+                          regexec("^\\s*(-?[0-9]{4})(-([0-9]{2})(-([0-9]{2}))?)?[?~%]*\\s*([/T].*)?$",
+                                  fields[["date"]]))[[1]]
+        month <- if(length(ymd)) suppressWarnings(as.integer(ymd[4])) else NA
+        if(length(ymd) && (is.na(month) || month %in% c(1:12, 21:24))){
+            fields[["year"]] <- ymd[2]
+            fields[["month"]] <- if(month %in% 1:12) month.name[month]
+            fields[["day"]] <- if(month %in% 1:12 && nzchar(ymd[6])) ymd[6]
+        }
     }
     do.call(utils::bibentry, fields)
 }
