@@ -398,7 +398,11 @@ Rdo_flatinsert <- function(rdo, val, pos, before = TRUE){                       
     .get_all_bibs <- function()
         allbibs
 
-    list(.get_bibs0 = .get_bibs0, .get_all_bibs = .get_all_bibs)
+    .set_bibs0 <- function(package, bibs)
+        allbibs[[package]] <<- bibs
+
+    list(.get_bibs0 = .get_bibs0, .get_all_bibs = .get_all_bibs,
+         .set_bibs0 = .set_bibs0)
 })
 
   ## TODO: auto-deduce 'package'?

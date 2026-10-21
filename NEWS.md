@@ -1,5 +1,12 @@
 # Rdpack 2.6.6.9000
 
+- new roxygen2 roclet `rdpack_roclet()` writes the Rd files with the citation macros
+  already expanded. Rd files containing the macros make `R CMD build` install the package
+  before it can build the tarball, which for a package with compiled code means compiling
+  it twice; Rd files written by the roclet do not. The roxygen comments keep the macros.
+  Use it in place of the `rd` roclet:
+  `Roxygen: list(roclets = c("collate", "namespace", "Rdpack::rdpack_roclet"))`.
+
 - added examples for usage of free text citations (mixed bib keys and explanatory text, like
   'Chapter 3' and clarified for roxygen2 users that if this results in two successive 'at'
   signs, `@@`, at least one of them should be duplicated in the roxygen comments (since

@@ -106,6 +106,7 @@ export(
 , Rdo2Rdf
 , Rdreplace_section
 , Rdtagapply
+, rdpack_roclet
 , rebib
 , reprompt
 , RStudio_reprompt
