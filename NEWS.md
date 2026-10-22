@@ -1,7 +1,7 @@
 # Rdpack 2.6.6.9000
 
-- new roxygen2 roclet `rdpack_roclet()` pre-expands citation macros in Rd files, avoiding
-  a second package installation during `R CMD build`.
+- new roxygen2 roclet `rdpack_roclet()` pre-expands citation macros in Rd files, so that
+  `R CMD build` need not install the package.
 
 - now requires R >= 3.6.0.
 
