@@ -1,11 +1,7 @@
 # Rdpack 2.6.6.9000
 
-- new roxygen2 roclet `rdpack_roclet()` writes the Rd files with the citation macros
-  already expanded. Rd files containing the macros make `R CMD build` install the package
-  before it can build the tarball, which for a package with compiled code means compiling
-  it twice; Rd files written by the roclet do not. The roxygen comments keep the macros.
-  Use it in place of the `rd` roclet:
-  `Roxygen: list(roclets = c("collate", "namespace", "Rdpack::rdpack_roclet"))`.
+- new roxygen2 roclet `rdpack_roclet()` pre-expands citation macros in Rd files, avoiding
+  a second package installation during `R CMD build`.
 
 - now requires R >= 3.6.0.
 
