@@ -9,14 +9,10 @@
 rdpack_roclet <- function() {
     if(!requireNamespace("roxygen2", quietly = TRUE))
         stop("rdpack_roclet() requires package 'roxygen2'")
-    ## registered here rather than in NAMESPACE, since roxygen2 is only
-    ## suggested and S3method(pkg::generic, class) needs R >= 3.6.0
-    registerS3method("roclet_process", "roclet_rdpack", .roclet_process_rdpack,
-                     envir = asNamespace("roxygen2"))
     roxygen2::roclet(c("rdpack", "rd"))
 }
 
-.roclet_process_rdpack <- function(x, blocks, env, base_path) {
+roclet_process.roclet_rdpack <- function(x, blocks, env, base_path) {
     topics <- NextMethod()
     .refresh_package_bibs(base_path)
     for(topic in topics)
