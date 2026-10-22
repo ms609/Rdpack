@@ -7,6 +7,8 @@
   Use it in place of the `rd` roclet:
   `Roxygen: list(roclets = c("collate", "namespace", "Rdpack::rdpack_roclet"))`.
 
+- now requires R >= 3.6.0.
+
 - added examples for usage of free text citations (mixed bib keys and explanatory text, like
   'Chapter 3' and clarified for roxygen2 users that if this results in two successive 'at'
   signs, `@@`, at least one of them should be duplicated in the roxygen comments (since
