@@ -48,6 +48,8 @@ Bibtex references and citations
   : Insert bibtex references in Rd and roxygen2 documentation
 - [`insert_citeOnly()`](https://geobosh.github.io/Rdpack/reference/insert_citeOnly.md)
   : Generate citations from bibtex keys
+- [`rdpack_roclet()`](https://geobosh.github.io/Rdpack/reference/rdpack_roclet.md)
+  : Expand citation macros when roxygen2 writes the Rd files
 
 ## Replacing parts of Rd objects
 
